@@ -35,3 +35,30 @@ FROM Customers
 INNER JOIN  Orders ON Customers.CustomerID = Orders. CustomerID
 WHERE  Orders.OrderSum > 17000
 
+Вывести следующие колонки: имя поставщика, сумма заказа. Результаты отсортировать по поставщикам в порядке убывания:
+SELECT CompanyName, OrderSum
+FROM Customers
+INNER JOIN Orders ON Customers.CustomerID = Orders. CustomerID
+ORDER by CompanyName DESC
+
+Вывести следующие колонки: имя поставщика, дата заказа. Вывести таким образом, чтобы все заказчики из таблицы 1 были показаны в таблице результатов.
+SELECT CompanyName, OrderDate
+FROM Customers
+LEFT JOIN Orders ON Customers.CustomerID = Orders. CustomerID
+
+Написать запрос, выводящий количество работающих счетов (депозитов) с остатком более 0 по каждому клиенту в виде такой таблицы:
+Колонки
+ФИО клиента
+Рубли
+Доллары
+Евро
+
+SELECT Clients.ClientName AS [ФИО клиента],
+COUNT (CASE When Deposits. Currency = 'RUB' THEN 1 END) AS [Рубли],
+COUNT (CASE When Deposits. Currency = 'USD' THEN 1 END) AS [Доллары],
+COUNT (CASE When Deposits. Currency = 'EUR' THEN 1 END) AS [Евро]
+From Clients 
+INNER Join Deposits ON Deposits.ClientID = Clients.ClientID
+INNER Join Status ON Deposits. StatusID = Status. StatusID
+Where Status.StatusCode = 'WORK' and Deposits. Saldo > 0
+GROUP by Clients.ClientName
