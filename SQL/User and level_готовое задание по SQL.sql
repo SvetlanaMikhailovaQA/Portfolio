@@ -47,6 +47,4 @@ SELECT user_name
 FROM user
 inner JOIN level on user.level_id = level.id
 WHERE level.level_name ='admin'								
-								
- 
 
